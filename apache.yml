@@ -1,0 +1,31 @@
+- name: Install Apache Web Server
+  hosts: webservers
+  become: yes
+  tasks:
+    - name: Install Apache
+      apt:
+        name: apache2
+        state: present
+
+    - name: Start Apache Service
+      service:
+        name: apache2
+        state: started
+
+
+
+# *** Read this instruction to apply this configuration. *** 
+
+# it install apache on remote server
+# one inventory file is required for that, in which we add remote server ip
+# so i upload server.ini inventory file for that 
+
+# to apply run --> ansible-playbook -i inventory.ini apache.yml   
+# if getting error use sudo before command.
+
+# name: Describes the playbook's purpose.you write anything here releted to your installations.
+# host: webservers --> means in inventory file you give the block name in which you add your remote server private ip.
+# become : yes --> means Runs tasks with sudo privileges in your remote server.
+        
+
+        
