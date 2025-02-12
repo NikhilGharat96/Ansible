@@ -1,0 +1,35 @@
+- name: myplay1
+  hosts: localhost
+  become: true
+  connection: local
+  tasks:
+   - name: install LEMP
+     apt:
+      name: "{{ item }}"
+      state: present
+     with_items:
+      - nginx
+      - php
+      - php8.3-fpm
+      - mariadb-server
+   - name: start all service
+     service:
+      name: "{{ item }}"
+      state: started
+     with_items:
+      - nginx
+      - php8.3-fpm
+      - mariadb
+   - name: restart all service
+     service:
+      name: "{{ item }}"
+      state: restarted
+     with_items:
+      - nginx
+      - php8.3-fpm
+      - mariadb
+
+
+
+
+# you also replace with_items with loop. take loop at the with_items place.
