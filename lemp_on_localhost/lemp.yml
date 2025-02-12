@@ -46,5 +46,11 @@
 
 
 
-# Run -->  ansible-playbook lemp.yml      
-      
+# Run -->  ansible-playbook lemp.yml   
+
+# *** if you want to install lemp on remote server so which changes you have to do :
+
+# --> remove the coonection: local from your file.
+# --> create the inventory file and add remote server private ip .  eg. lempserver.ini
+# --> replace the localhost with your inventory file block name.    eg. i take webserver block name.
+# --> run command with inventory file .  i.e.  ansible-playbook -i lempserver.ini lemp.yml
