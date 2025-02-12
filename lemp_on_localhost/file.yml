@@ -1,0 +1,21 @@
+- name: myplay1
+  hosts: localhost
+  become: true
+  connection: local
+  tasks:
+   - name: create file
+     file:
+      name: myfile.txt
+      state: touch
+   - name: create folder
+     file:
+      name: mydir
+      state: directory
+   - name: copy file to dir
+     copy:
+      src: myfile.txt
+      dest: mydir/
+
+
+
+# Run --> ansible-playbook file.yml
