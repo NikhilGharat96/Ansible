@@ -73,4 +73,9 @@
 # eg. launch one ec2 with A.linux and another one with ubuntu os
 # add both servers private ip in inventory file.
 
+# you try with different when condition also
+# eg. replace  when: ansible_os_family=="RedHat"  with -->   when: ansible_facts['distribution']=="Amazon" for A.linux and
+#     replace  when: ansible_os_family=="Debian"  with -->   when: ansible_facts['distribution']=="Ubuntu"  for ubuntu.
+ 
+
 # to appy -->  ansible-playbook -i webserver.ini diffos.yml              ....... use sudo if you are getting error.
