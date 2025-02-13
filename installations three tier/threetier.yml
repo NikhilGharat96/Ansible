@@ -1,0 +1,54 @@
+- name: Three_tier_app
+  hosts: all
+  become: true
+  tasks:
+   - name: install nginx
+     apt:
+      name: nginx
+      state: present
+     when: inventory_hostname in groups['webserver']
+   - name: start nginx service
+     service:
+      name: nginx
+      state: started
+     when: inventory_hostname in groups['webserver']
+   - name: install php
+     apt:
+      name: php
+      state: present
+     when: inventory_hostname in groups['appserver']
+   - name: update apt
+     shell: 'apt update'
+   - name: install php8.3-fpm
+     apt:
+      name: php8.3-fpm
+      state: present
+     when: inventory_hostname in groups['appserver']
+   - name: start php-fpm service
+     service:
+      name: php8.3-fpm
+      state: started
+     when: inventory_hostname in groups['appserver']
+   - name: install mysql
+     apt:
+      name: mariadb-server
+      state: present
+     when: inventory_hostname in groups['dbserver']
+   - name: start mysql service
+     service:
+      name: mariadb
+      state: started
+     when: inventory_hostname in groups['dbserver']
+
+
+
+
+# ReadME
+
+# in above we write hosts: all  it means do changes on all blocks that are mention in inventory file.
+# for this three tier configuration you have to launh three instances eg.for web,app and db teir. eg. i launch servers with ubuntu os.
+# in inventory file create three blocks for webserver,appserver and dbserver and add correct pvt_ip in that blocks.
+# to apply --->  ansible-palybook -i threetier.ini threetier.yml
+
+
+
