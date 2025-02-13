@@ -67,7 +67,10 @@
       - mariadb
 
 
+# ReadME
 
 # if you have two remote server with differnt os, so how install lemp on both
 # eg. launch one ec2 with A.linux and another one with ubuntu os
 # add both servers private ip in inventory file.
+
+# to appy -->  ansible-playbook -i webserver.ini diffos.yml              ....... use sudo if you are getting error.
