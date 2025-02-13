@@ -1,0 +1,73 @@
+- name: myplay1
+  hosts: webservers
+  become: true
+  tasks:
+   - name: update package manager in Ubuntu
+     shell: apt update
+     when: ansible_os_family=="Debian"
+   - name: update package manager in A. Linux
+     dnf:
+      name: '*'
+      state: latest
+     when: ansible_os_family=="RedHat"
+   - name: install LEMP on ubuntu server
+     apt:
+      name: "{{ item }}"
+      state: present
+     when: ansible_os_family=="Debian"
+     with_items:
+      - nginx
+      - php
+      - php8.3-fpm
+      - mariadb-server
+   - name: install LEMP on A.Linux server
+     dnf:
+      name: "{{ item }}"
+      state: present
+     when: ansible_os_family=="RedHat"
+     with_items:
+      - nginx
+      - php
+      - mariadb105-server
+   - name: start all service in ubuntu server
+     service:
+      name: "{{ item }}"
+      state: started
+     when: ansible_os_family=="Debian"
+     with_items:
+      - nginx
+      - php8.3-fpm
+      - mariadb
+   - name: start all service in A.Linux server
+     service:
+      name: "{{ item }}"
+      state: started
+     when: ansible_os_family=="RedHat"
+     with_items:
+      - nginx
+      - php-fpm
+      - mariadb
+   - name: restart all service im ubuntu server
+     service:
+      name: "{{ item }}"
+      state: restarted
+     when: ansible_os_family=="Debian"
+     with_items:
+      - nginx
+      - php8.3-fpm
+      - mariadb
+   - name: restart all service in A.linux server
+     service:
+      name: "{{ item }}"
+      state: restarted
+     when: ansible_os_family=="RedHat"
+     with_items:
+      - nginx
+      - php-fpm
+      - mariadb
+
+
+
+# if you have two remote server with differnt os, so how install lemp on both
+# eg. launch one ec2 with A.linux and another one with ubuntu os
+# add both servers private ip in inventory file.
