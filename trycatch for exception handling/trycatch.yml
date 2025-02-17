@@ -18,3 +18,8 @@
 
 
 # trycatch means if error is occurs in code during execution so trycatch skip this and run rescue block.
+# eg. in above code we try to install nginx on our ubuntu server, but in block we use dnf package manager to install nginx and if we execute this so it getting error ,
+#  beacuse dnf package manager not support to ubuntu , so to skip this error and execute our entire code without stop in middle , we use rescue .
+# in above -block means try , rescue means catch and always means finally.
+# -debug: means in which we simple show msg regarding our block.
+
