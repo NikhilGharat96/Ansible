@@ -27,6 +27,12 @@
 
 
 
-# you have to create index.html file in current dir.
+# you have to create index.html file in current dir and write anything in that.
 # and copy nginx config file in current dir and made some changes, i upload the modify config file its based on above code.
 # add port 90 in sg as we mention port in vars: my_port: 90           .... you take any port no.
+# apply -->  ansible-playbook templatedemo.yml 
+
+# to check your configuration are done or not , copy server public_ip and paste in browser with port 90.     eg. 136.76.8.0:90
+# if you see your created index.html page so, configurations are done successfully.
+
+
