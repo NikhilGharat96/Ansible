@@ -1,0 +1,32 @@
+- name: myplay1
+  hosts: localhost
+  become: true
+  connection: local
+  vars:
+    my_port: 90
+    my_path: /var/www/html/myweb
+  tasks:
+   - name: install nginx
+     apt: name=nginx  state=present
+   - name: start nginx service
+     service: name=nginx state=started
+   - name: create a directory
+     file: path=/var/www/html/myweb  state=directory
+   - name: copy file
+     copy: src=./index.html  dest=/var/www/html/myweb
+   - name: copy configuration file
+     template:
+       src: ./mynginx.conf
+       dest: /etc/nginx/sites-enabled/default
+   - name: reload nginx
+     service:
+       name: nginx
+       state: reloaded
+
+
+
+
+
+# you have to create index.html file in current dir.
+# and copy nginx config file in current dir and made some changes, i upload the modify config file its based on above code.
+# add port 90 in sg as we mention port in vars: my_port: 90           .... you take any port no.
