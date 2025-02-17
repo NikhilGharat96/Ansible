@@ -1,0 +1,20 @@
+- name: myplay1
+  hosts: localhost
+  become: true
+  connection: local
+  tasks:
+   - block:
+      - name: install nginx
+        dnf: name=nginx state=present
+      - debug: msg="in block"
+     rescue:
+      - name: install
+        apt: name=nginx state=present
+      - debug: msg="in rescue"
+     always:
+      - debug: msg="in always"
+
+
+
+
+# trycatch means if error is occurs in code during execution so trycatch skip this and run rescue block.
